@@ -1,0 +1,18 @@
+{
+    "prompt_prefix": "Two sentences are given, sentence 1 and sentence 2. Given that Sentence 1 is True, Sentence 2 (by implication), must either be (a) definitely True, (b) definitely False. You are presented with an initial Sentence 1 and Sentence 2 and the correct initial relationship label (definitely True or definitely False). Edit Sentence 2 making a small number of changes such that the following 3 conditions are always satisfied:\n(a) The target label must accurately describe the truthfulness of the modified Sentence 2 given the original Sentence 1.\n(b) In order to edit sentence 2, must only make use of one or two relevant words present in the provided list of words.\n(c) Do not rewrite sentence 2 completely, only a small number of changes need to be made. Here are some examples:",
+    "a_prefix": "modified sentence 2: ",
+    "q_prefix": "",
+    "training_instances": [
+        "original sentence 1: Oh, you do want a lot of that stuff.\t original sentence 2: I see, you want to ignore all of that stuff.\t initial relationship label: definitely False\t target label: definitely True\t List of words: [\u2019correct\u2019, \u2019before\u2019, \u2019happen\u2019, \u2019already\u2019, \u2019more\u2019, \u2019saw\u2019, \u2019on\u2019]",
+        "original sentence 1: Region wide efforts are also underway.\t original sentence 2: Regional efforts have not stopped.\t initial relationship label: definitely True\t target label: definitely False\t List of words: [\u2019talking\u2019, \u2019hold\u2019, \u2019put\u2019, \u2019caller\u2019, \u2019on\u2019]",
+        "original sentence 1: yeah you could stand in there if you really wanted to i guess.\t original sentence 2: If you want you can sit there I guess.\t initial relationship label: definitely False\t target label: definitely True\t List of words: [\u2019there\u2019, \u2019without\u2019, \u2019ants\u2019, \u2019stand\u2019, \u2019even\u2019]",
+        "original sentence 1: and uh every every opportunity there is to make a dollar he seems to be exploiting that.\t original sentence 2: He works to make money.\t initial relationship label: definitely True\t target label: definitely False\t List of words: [\u2019work\u2019, \u2019pass\u2019, \u2019dollars\u2019, \u2019up\u2019, \u2019owe\u2019]"
+    ],
+    "training_labels": [
+        "I see, you want more of that stuff.",
+        "Regional efforts are on hold at the moment.",
+        "If you want you can stand there I guess.",
+        "He passes up on opportunities to make money."
+    ],
+    "max_tokens": 64
+}

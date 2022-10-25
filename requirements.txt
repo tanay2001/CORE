@@ -1,0 +1,7 @@
+faiss
+torch
+nltk
+openai
+spacy
+transformers
+datasets

@@ -1,0 +1,14 @@
+{
+    "prompt_prefix": "Given a movie review and its sentiment. Edit the review making a small number of changes such that, the following conditions are always satisfied:\n(a) The target label accurately describes the sentiment of the edited review.\n (b) Make use of only a few key words provided in the list of words to edit the review.\n Do not remove or add any extra information, only make changes to change the sentiment of the review.",
+    "a_prefix": "Edited Review: ",
+    "q_prefix": "",
+    "training_instances": [
+        "Review: Long, boring, blasphemous. Never have I been so glad to see ending credits roll.\nLabel: Negative\nList of relevant words: [\u2019clean\u2019 , \u2019now\u2019, \u2019brought\u2019, \u2019perfect\u2019 , \u2019many\u2019 ,\u2019interesting\u2019 ,\u2019memories\u2019, \u2019sad\u2019]\n Target Label: Positive",
+        "Review: I don\u2019t know why I like this movie so well, but I never get tired of watching it.\nLabel: Positive\nList of relevant words: [\u2019hate\u2019 , \u2019now\u2019, \u2019supposedly\u2019 , \u2019many\u2019 , \u2019memories\u2019, \u2019watching\u2019]\n Target Label: Negative"
+    ],
+    "training_labels": [
+        "Perfect, clean,interesting. Never have I been so sad to see ending credits roll.",
+        "I don\u2019t know why I hate this movie so much, now I am tired of watching it."
+    ],
+    "max_tokens": 512
+}
