@@ -32,6 +32,16 @@ In addition to that, openai login key is required to access GPT-3.
 
 Can download all the trained model checkpoints and datasets from here [GDrive](https://drive.google.com/drive/folders/11C8TtGWXaKfspKnNN_yk4IZNOe93_IXX?usp=sharing) <br>
 
+The directory structure
+
+- `cfdpr senti` : CFDPR model weights for sentiment analysis task
+- `cfdpr nli`: CFDPR model weights for NLI
+- `cross encoder nli`: Re-ranker weights for NLI
+- `data`
+    - `MNLI` : Data augmentation datasets + CORE counterfactuals
+    - `IMDB` : Data augmentation datasets + CORE counterfactuals
+    - `CFDPR Training data` : training data for both the tasks
+
 ## Training
 
 The most important part of CORE is the retrieval stage, we need to train a retriever that can retrieve texts with the opposite relationship with the given input opposed to a traditional retriever. We make use of the DPR framework to train the retriever. 
@@ -52,7 +62,7 @@ For generating the counterfactuals the first step is to generate the search copo
 
 **Note:** This stage is only a one time thing that has to be setup at the start, if the index has aleady been created skip to the retrive and edit step.
 
-The encoded search corpus for both nli and sentiment are available at `tanay/sentiment-corpus`, `tanay/nli-corpus` . Use this path as `encode_path` and just run `do_index`. <br>
+The encoded search corpus for both nli and sentiment are available at huggingface hub [sentiment-corpus](https://huggingface.co/datasets/tanay/sentiment-corpus), [nli-corpus](https://huggingface.co/datasets/tanay/nli-corpus) . Use this path as `encode_path` and just run `do_index`. <br>
 
 Run `indexing.py` with the following parameters
 - `do_encode` : to encode each text into a vector that could be used for retrieval
@@ -154,4 +164,4 @@ Please cite our paper if you use CORE in your work:
 
 ## Acknowlegements
 
-Part of the code have been borrowed from [DPR](https://github.com/facebookresearch/DPR) and [few-shot-learning](https://github.com/tonyzhaozh/few-shot-learning) repos.
+Parts of the code have been borrowed from [DPR](https://github.com/facebookresearch/DPR) and [few-shot-learning](https://github.com/tonyzhaozh/few-shot-learning) repos.
