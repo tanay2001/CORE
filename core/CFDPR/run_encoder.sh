@@ -1,0 +1,23 @@
+NUM_GPU=3
+export OMP_NUM_THREADS=8
+OUPUT_DIR=
+python3 -m torch.distributed.launch --nproc_per_node=$NUM_GPU \
+train_dense_encoder.py \
+train_datasets=[] \
+dev_datasets=[] \
+encoder.pretrained_model_cfg=bert-base-uncased \
+train=biencoder_local \
+val_av_rank_start_epoch=80 \
+encoder.sequence_length=32 \
+train.batch_size=32 \
+train.weight_decay=0.01 \
+train.warmup_steps=60 \
+train.dev_batch_size=32 \
+train.max_grad_norm=2.0 \
+train.learning_rate=2e-5 \
+train.num_train_epochs=50 \
+train.gradient_accumulation_steps=1 \
+train.eval_per_epoch=1 \
+train.hard_negatives=5 \
+checkpoint_file_name=cfdpr_senti_biencoder \
+output_dir=$OUPUT_DIR \

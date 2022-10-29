@@ -233,9 +233,6 @@ def generate_counterfactuals(args):
 
 
 
-
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Parameters')
     parser.add_argument("--cuda", action="store_true", help="use cuda")

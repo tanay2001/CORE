@@ -48,14 +48,31 @@ The most important part of CORE is the retrieval stage, we need to train a retri
 
 ### CFDPR
 
-to be updated ..
+We train our counterfactual retriever using the DPR model. Refer to Section 3.1 of our paper for understanding the training data generation process. The training data can be dowloaded from [here](https://drive.google.com/drive/folders/1Dm2dgrnyW6uWTg1hoIDDVkXAE1IiLyzC?usp=share_link).
+
+Download the data and move it to `core/CFDPR/downloads` folder. The following are the dataset names that can be used in training. <br>
+
+- `mnli_train_eNc` & `mnli_dev_eNc`: NLI training & dev dataset
+- `senti_tain` & `senti_dev`:  IMDB training & dev dataset
+
+
+Run the following to train the CFDPR retriever
+```
+cd core/CFDPR
+bash run_encoder.sh
+```
 
 ### Cross Encoder
 
-to be updated ..
+To improve the accuracy of counterfactual retrieval we train a re-ranker module (cross encoder) that re-ranks the text excerpts retrieved from CFDPR. <br>
+Install the sentence transformers library (`pip3 install -U sentence-transformers`). 
+
+Run
+```python3 cross_nli.py --epochs 10 --bz 64 --train_file crossencoder_mnli_train.csv --val_file crossencoder_mnli_val.csv```
+
+<br>
 
 ## Generating Counterfactuals 
-<br>
 
 For generating the counterfactuals the first step is to generate the search copora. Run the following code to encode and index the search copora. <br>
 `Alert : This takes ~30GB disk space and use of GPU is a must`
@@ -94,7 +111,7 @@ python3 indexing.py \
  --model_dir ./cfdpr_models/senti \
  --n_gpu 3 \
 ```
-<br><br>
+<br>
 
 Onces the indexs have been created, we can now perform the retrive and edit step. First cd to core. Based on the `retrieve`, `edit` and `retrieve-edit` argument you can choose which augmentation strategy you want to do. Only `retrieve` corresponds to the CF-DPR counterfactuals, `edit` to GPT-3 counterfactuals and `retrieve-edit` to CORE counterfactuals.
 
@@ -104,12 +121,11 @@ Run `main.py` with the following parameters
 - `corpus`: the search corpus which the retriever will use to retrieve counterfactuals
 - `index`: the faiss index for the given corpus
 - `input_file`: list of json file as input with the following format
-    - `nli`: keys must be `premise`, `hypothesis`, `label`, where label values from [0 (entailment), 1(neutral), 2(contradiction)]
-    - `sentiment`: keys must be `text`, `label`, where label values from [0 (positive), 1 (negative)]
+    - `nli`: keys must be `premise`, `hypothesis`, `label`, where label values from [0 (entailment), 1 (neutral), 2 (contradiction)]
+    - `sentiment`: keys must be `text`, `label`, where label values from [0 (negative), 1 (positive)]
 - `output_file`: list of json file to save the outputs
 
-<br><br>
-
+<br>
 
 ### Sentiment Ananlysis
 
@@ -146,7 +162,11 @@ python3 main.py \
 
 ## Data Augmentation
 
-For training and testing models on augmented data, use the scripts provided in the `nli` and `sentiment` folder. Can download the CORE Counterfactuals from [here](https://drive.google.com/drive/folders/11C8TtGWXaKfspKnNN_yk4IZNOe93_IXX?usp=sharing).
+For training and testing models on augmented data, use the scripts provided in the `nli` and `sentiment` folder. Can download the CORE Counterfactuals from [here](https://drive.google.com/drive/folders/11C8TtGWXaKfspKnNN_yk4IZNOe93_IXX?usp=sharing). Update the data directory path accordingly. <br>
+
+
+- `run_nli.sh` / `run_senti.sh` : To fine-tune DeBERTa base on the augmented dataset 
+- `test_all.sh`: Testing the finetuned model
 
 ## Citation
 
